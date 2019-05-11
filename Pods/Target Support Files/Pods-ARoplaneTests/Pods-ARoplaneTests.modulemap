@@ -1,0 +1,6 @@
+framework module Pods_ARoplaneTests {
+  umbrella header "Pods-ARoplaneTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
