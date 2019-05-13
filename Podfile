@@ -7,6 +7,10 @@ target 'ARoplane' do
 
   # Pods for ARoplane
   pod 'ARCL'
+  pod 'Alamofire', '~> 4.5'
+  pod "ModelMapper"  
+  pod 'Compass'
+  pod 'Swinject'
 
   
   target 'ARoplaneTests' do

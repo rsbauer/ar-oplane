@@ -1,16 +1,34 @@
 PODS:
+  - Alamofire (4.7.3)
   - ARCL (1.0.4)
+  - Compass (6.0.0)
+  - ModelMapper (9.0.1):
+    - ModelMapper/Core (= 9.0.1)
+  - ModelMapper/Core (9.0.1)
+  - Swinject (2.5.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.5)
   - ARCL
+  - Compass
+  - ModelMapper
+  - Swinject
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - ARCL
+    - Compass
+    - ModelMapper
+    - Swinject
 
 SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   ARCL: 5fd2b0d7aabf91f15dbc0e8c510b25516b8a755a
+  Compass: ff30e2056c549ea5cb5b8a307d28ef628e4209ff
+  ModelMapper: 89a61430a75e6265040dc9555ab1feddeb25b986
+  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
 
-PODFILE CHECKSUM: 96dc0e191a2aed12254ecd42616961e4c6de4845
+PODFILE CHECKSUM: d85b19cbd7c4040c04432c1427964a4a892746ed
 
 COCOAPODS: 1.5.3
