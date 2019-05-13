@@ -20,6 +20,10 @@ private class AppDelegate: PluggableApplicationDelegate, AppDelegateType {
 
 	lazy var container = Container { inboundContainer in
 		weak var weakContainer = inboundContainer
+		inboundContainer.register(InitializeWindowServiceType.self) { _ in
+			InitializeWindowService()
+		}.inObjectScope(.container)
+
 	}
 
 	override var services: [ApplicationService] {
@@ -30,9 +34,15 @@ private class AppDelegate: PluggableApplicationDelegate, AppDelegateType {
 				])
 		}
 		
+		guard let initializeWindowService =
+			(container.resolve(InitializeWindowServiceType.self) as? ApplicationService) else {
+			return services
+		}
+		
 		// in theory, it shouldn't matter when services are spun up,
 		// but some service need to be first and last.
 		services.append(contentsOf: [
+			initializeWindowService
 			])
 		
 		return services
