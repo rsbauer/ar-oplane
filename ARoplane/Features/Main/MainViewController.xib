@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="ARoplane" customModuleProvider="target">
             <connections>
-                <outlet property="sceneView" destination="fKc-BW-KhI" id="AMw-Ti-5pF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,18 +19,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKc-BW-KhI">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </arscnView>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="fKc-BW-KhI" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6TW-Ka-QgF"/>
-                <constraint firstItem="fKc-BW-KhI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NFv-Ee-HQC"/>
-                <constraint firstItem="fKc-BW-KhI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SWm-Dx-MjC"/>
-                <constraint firstItem="fKc-BW-KhI" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="fl4-T6-i0g"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>

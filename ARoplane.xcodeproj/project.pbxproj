@@ -200,9 +200,9 @@
 		66B87F7B2288EE39001EFF3F /* StateMachines */ = {
 			isa = PBXGroup;
 			children = (
+				66B87F862288EE39001EFF3F /* State.swift */,
 				66B87F7C2288EE39001EFF3F /* StateMachine.swift */,
 				66B87F7D2288EE39001EFF3F /* Network */,
-				66B87F862288EE39001EFF3F /* State.swift */,
 			);
 			path = StateMachines;
 			sourceTree = "<group>";
