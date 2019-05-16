@@ -30,6 +30,7 @@
 		6638769422890554002FE684 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6638769222890554002FE684 /* MainViewController.swift */; };
 		6638769522890554002FE684 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6638769322890554002FE684 /* MainViewController.xib */; };
 		6638769722890639002FE684 /* InitializeWindowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6638769622890639002FE684 /* InitializeWindowService.swift */; };
+		664E07E8228D0D2800AC068E /* StateVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664E07E7228D0D2800AC068E /* StateVector.swift */; };
 		66B87F872288EE39001EFF3F /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B87F7C2288EE39001EFF3F /* StateMachine.swift */; };
 		66B87F882288EE39001EFF3F /* NetworkStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B87F7E2288EE39001EFF3F /* NetworkStateMachine.swift */; };
 		66B87F892288EE39001EFF3F /* CompletedNetworkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B87F802288EE39001EFF3F /* CompletedNetworkState.swift */; };
@@ -86,6 +87,7 @@
 		6638769222890554002FE684 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6638769322890554002FE684 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		6638769622890639002FE684 /* InitializeWindowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializeWindowService.swift; sourceTree = "<group>"; };
+		664E07E7228D0D2800AC068E /* StateVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateVector.swift; sourceTree = "<group>"; };
 		66B87F7C2288EE39001EFF3F /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		66B87F7E2288EE39001EFF3F /* NetworkStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStateMachine.swift; sourceTree = "<group>"; };
 		66B87F802288EE39001EFF3F /* CompletedNetworkState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedNetworkState.swift; sourceTree = "<group>"; };
@@ -180,6 +182,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		664E07E6228D0CF700AC068E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				664E07E7228D0D2800AC068E /* StateVector.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		66B87F782288EDF3001EFF3F /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +264,7 @@
 		66F4EE64228660EB00450D53 /* ARoplane */ = {
 			isa = PBXGroup;
 			children = (
+				664E07E6228D0CF700AC068E /* Models */,
 				6638768E2289046C002FE684 /* App */,
 				66B87F7B2288EE39001EFF3F /* StateMachines */,
 				66B87F7A2288EE18001EFF3F /* Assets */,
@@ -575,6 +586,7 @@
 				66B87F872288EE39001EFF3F /* StateMachine.swift in Sources */,
 				6638769722890639002FE684 /* InitializeWindowService.swift in Sources */,
 				66B87F8E2288EE39001EFF3F /* FailedNetworkState.swift in Sources */,
+				664E07E8228D0D2800AC068E /* StateVector.swift in Sources */,
 				66B87F8B2288EE39001EFF3F /* NetworkBaseState.swift in Sources */,
 				66F4EE66228660EB00450D53 /* AppDelegate.swift in Sources */,
 				66B87F8F2288EE39001EFF3F /* State.swift in Sources */,
