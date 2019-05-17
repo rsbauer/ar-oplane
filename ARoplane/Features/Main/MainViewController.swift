@@ -8,6 +8,7 @@
 
 import ARCL
 import CoreLocation
+import Swinject
 import UIKit
 
 // See: https://github.com/ProjectDent/ARKit-CoreLocation
@@ -16,52 +17,59 @@ import UIKit
 // piaware build: https://flightaware.com/adsb/piaware/build
 // adsbexchange feeder image: https://adsbexchange.com/how-to-feed/
 
+public struct BoundingBox {
+	let minLat: Double
+	let minLon: Double
+	let maxLat: Double
+	let maxLon: Double
+}
+
 public class MainViewController: UIViewController {
 	
 	enum Constants {
 		static let aircraftRefreshIntervalSeconds: TimeInterval = 30
+		static let locationSubscriberName = "MainViewController"
+		static let metersInMile = 1609.34
+		static let mileRadius: Double = 20
 	}
 	
 	private var sceneLocationView = SceneLocationView()
 	private let adjustNorthByTappingSidesOfScreen = true
 	private var networkMachine: NetworkStateMachine?
 	private var aircraftRefreshTimer: Timer?
-
+	private var container: Container?
+	private var locationService: LocationServiceType?
+	private var currentLocation: CLLocation?
+	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
 
-		grabSomeAirplanes()		// should put this somewhere else!
-		
-		aircraftRefreshTimer = Timer.scheduledTimer(
-		withTimeInterval: Constants.aircraftRefreshIntervalSeconds,
-		repeats: true,
-		block: { [weak self] (_) in
-			guard let strongSelf = self else {
-				return
-			}
-			
-			strongSelf.grabSomeAirplanes()
-		})
+		if let applicationDelegate = UIApplication.shared.delegate as? AppDelegateType {
+			container = applicationDelegate.container
+			locationService = container?.resolve(LocationServiceType.self)
+		}
 
 		view.addSubview(sceneLocationView)
 	}
 	
 	public override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		locationService?.subscribe(name: Constants.locationSubscriberName, subscriber: self)
 		sceneLocationView.run()
+	}
+	
+	public override func viewWillDisappear(_ animated: Bool) {
+		locationService?.unsubscribe(name: Constants.locationSubscriberName, subscriber: self)
+		sceneLocationView.pause()
+		sceneLocationView.removeFromSuperview()
+		super.viewWillDisappear(animated)
 	}
 	
 	public override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		sceneLocationView.frame = view.bounds
 	}
-	
-	public override func viewWillDisappear(_ animated: Bool) {
-		sceneLocationView.pause()
-		sceneLocationView.removeFromSuperview()
-		super.viewWillDisappear(animated)
-	}
-	
+
 	public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		super.touchesBegan(touches, with: event)
 		guard let touch = touches.first, let view = touch.view else {
@@ -81,8 +89,25 @@ public class MainViewController: UIViewController {
 		}
 	}
 	
-	func grabSomeAirplanes() {
-		let url = "https://opensky-network.org/api/states/all?lamin=40.5&lomin=-74.0&lamax=40.8&lomax=-73.0"
+	func startAirplaneScan(location: CLLocation) {
+		grabSomeAirplanes(location: location)
+		
+		aircraftRefreshTimer = Timer.scheduledTimer(
+			withTimeInterval: Constants.aircraftRefreshIntervalSeconds,
+			repeats: true,
+			block: { [weak self] (_) in
+				guard let strongSelf = self, let location = strongSelf.currentLocation else {
+					return
+				}
+				
+				strongSelf.grabSomeAirplanes(location: location)
+			})
+	}
+	
+	func grabSomeAirplanes(location: CLLocation) {
+		let box = getBoundingBox(for: location)
+		let url = "https://opensky-network.org/api/states/all?lamin=\(box.minLat)&lomin=\(box.minLon)&" +
+			"lamax=\(box.maxLat)&lomax=\(box.maxLon)"
 		let configuration = NetworkStateConfiguration(url: url, completed: { [weak self] (response) in
 			guard let strongSelf = self else {
 				return
@@ -119,12 +144,18 @@ public class MainViewController: UIViewController {
 		}, failed: { (error) in
 			// failed
 			print("Request failed! \(error.debugDescription)")
-		}) {
+		}, canceled: {
 			// cancelled
-		}
+		})
 		
 		networkMachine = NetworkStateMachine(configuration)
 		networkMachine?.stateMachine.enter(FetchNetworkState.self)
+	}
+	
+	func getBoundingBox(for location: CLLocation) -> BoundingBox {
+		let meters = Constants.mileRadius * Constants.metersInMile
+		let (min, max) = location.coordinate.calculateBoundingCoordinates(withDistance: meters)
+		return BoundingBox(minLat: min.latitude, minLon: min.longitude, maxLat: max.latitude, maxLon: max.longitude)
 	}
 	
 	func updateScene(with aircraft: [StateVector]) {
@@ -162,5 +193,12 @@ public class MainViewController: UIViewController {
 		sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode3)
 		
 		sceneLocationView.orientToTrueNorth = false
+	}
+}
+
+extension MainViewController: LocationServiceSubscriberType {
+	public func locationUpdate(_ location: CLLocation) {
+		currentLocation = location
+		startAirplaneScan(location: location)
 	}
 }

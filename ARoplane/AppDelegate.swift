@@ -24,6 +24,9 @@ private class AppDelegate: PluggableApplicationDelegate, AppDelegateType {
 			InitializeWindowService()
 		}.inObjectScope(.container)
 
+		inboundContainer.register(LocationServiceType.self) { _ in
+			LocationService()
+		}.inObjectScope(.container)
 	}
 
 	override var services: [ApplicationService] {

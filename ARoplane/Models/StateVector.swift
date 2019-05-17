@@ -8,6 +8,7 @@
 
 import Foundation
 
+// swiftlint:disable line_length
 /*
 Index 	Property 	Type 	Description
 0 	icao24 	string 	Unique ICAO 24-bit address of the transponder in hex string representation.
@@ -28,6 +29,7 @@ Index 	Property 	Type 	Description
 15 	spi 	boolean 	Whether flight status indicates special purpose indicator.
 16 	position_source 	int 	Origin of this state’s position: 0 = ADS-B, 1 = ASTERIX, 2 = MLAT
 */
+// swiftlint:enable line_length
 
 public struct StateVector {
 	
