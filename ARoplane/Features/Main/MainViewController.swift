@@ -48,13 +48,13 @@ public class MainViewController: UIViewController {
 			container = applicationDelegate.container
 			locationService = container?.resolve(LocationServiceType.self)
 		}
-
-		view.addSubview(sceneLocationView)
 	}
 	
 	public override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		locationService?.subscribe(name: Constants.locationSubscriberName, subscriber: self)
+
+		view.addSubview(sceneLocationView)
 		sceneLocationView.run()
 	}
 	
