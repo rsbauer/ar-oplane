@@ -18,7 +18,7 @@ Another limitation is the aircraft boxes may not perfectly line up due to latenc
 
 AR View 
 --- 
-<img src="https://raw.githubusercontent.com/rsbauer/ar-oplane/master/images/arview.png" width="400">
+<img src="https://raw.githubusercontent.com/rsbauer/ar-oplane/master/images/arview.png" width="600">
 
 ### Getting Started
 
