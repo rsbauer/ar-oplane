@@ -44,7 +44,7 @@ Before starting, you will need Cocoapods installed.
 
 5. Open the ComicReader.xcworkspace
 
-  `open ComicReader.wxworkspace`
+  `open ARoplane.xcworkspace`
 
 6. Build!
 
