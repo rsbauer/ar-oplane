@@ -48,6 +48,7 @@ public class MainViewController: UIViewController {
 			container = applicationDelegate.container
 			locationService = container?.resolve(LocationServiceType.self)
 		}
+		sceneLocationView.orientToTrueNorth = true
 	}
 	
 	public override func viewWillAppear(_ animated: Bool) {
@@ -191,8 +192,6 @@ public class MainViewController: UIViewController {
 		label3.textAlignment = .center
 		let annotationNode3 = LocationAnnotationNode(location: location3, view: label3)
 		sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode3)
-		
-		sceneLocationView.orientToTrueNorth = false
 	}
 }
 
